@@ -1,14 +1,14 @@
-# Agentic Workspace Framework
+# Agentic Workspace: Gemini CLI Edition
 
-This repository contains the AI workflows and skills required to turn any codebase into an autonomous, Asana-connected Agentic Workspace.
+This repository contains the AI workflows required to turn any codebase into an autonomous, Asana-connected Agentic Workspace using the **Gemini CLI**.
 
-## How to install this into an existing repository:
-1. Open your target repository (e.g., `aeo-pulse`) in **Google Antigravity**.
-2. Open the AI Chat and paste this exact prompt:
-   > *"Download the `.agents` folder from `https://github.com/iampatgrady/asana-ai-dev` into this workspace. You can clone it to a temp directory, copy the `.agents` folder over to my root, and then delete the temp directory."*
-3. Wait for the AI to copy the files, then type: `Run @project-onboarder` to configure your Asana connection and set up the project context.
+## Bootstrapping a New Repository
+1. Clone your target repository and open your terminal.
+2. Type `gemini chat` to start your AI session.
+3. Paste: *"Download the `.agents` folder and `GEMINI.template.md` from the `cli-version` branch of `https://github.com/iampatgrady/asana-ai-dev` into this workspace."*
+4. Run `@project-onboarder` to configure your Asana connection and set up the project context.
 
-## Daily Vibe Coder Workflow
-Once installed, use these two commands to build software:
-- `/asana-start`: The AI reads your Asana backlog, makes a branch, and plans the code.
-- `/asana-sync`: The AI saves your code, pushes it to Git, creates a PR link, updates your PM in Asana, and closes the ticket.
+## Daily Workflow
+Inside `gemini chat`, use these skills:
+- **Start Work:** Type *"Run @asana-start"*. The AI will read your Asana backlog, make a branch, and plan the code. You will need to type `Y` to consent to skill execution.
+- **Finish Work:** Type *"Run @asana-sync"*. The AI will save your code, push it to Git, create a PR link, update your PM in Asana, and close the ticket.

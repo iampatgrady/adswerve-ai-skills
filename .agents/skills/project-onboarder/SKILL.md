@@ -11,10 +11,10 @@ You are the initialization agent. Execute this workflow based on the MCP state.
 Attempt to call an Asana MCP tool (e.g., `asana_get_workspaces`).
 - **If the tool is missing or errors (Phase 1):**
   1. Ask the user for their Asana App `Client ID` and `Client Secret`.
-  2. Read `~/.gemini/mcp.json` (create it with an empty `{"mcpServers": {}}` object if it doesn't exist).
-  3. Inject the `asana` object with the `mcp-remote` config, embedding the credentials and the `disabledTools` array: `["get_items_for_portfolio", "get_portfolios", "get_portfolio", "get_workspace_users"]`.
+  2. Read `~/.gemini/settings.json` (create it with an empty `{"mcpServers": {}}` object if it doesn't exist).
+  3. Inject the `asana` object into `mcpServers`. Use `npx` with args `["-y", "mcp-remote@latest", "https://mcp.asana.com/v2/mcp", "3334", "--static-oauth-client-info", "{\"client_id\": \"[PROVIDED_ID]\", \"client_secret\": \"[PROVIDED_SECRET]\"}"]`. Include the `disabledTools` array: `["get_items_for_portfolio", "get_portfolios", "get_portfolio", "get_workspace_users"]`.
   4. Save the file.
-  5. **STOP.** Tell the user: *"I have configured your MCP plumbing. Please exit this chat, restart your Gemini CLI, authorize the Asana popup, and run `@project-onboarder` again!"*
+  5. **STOP.** Tell the user: *"I have configured your MCP plumbing in `~/.gemini/settings.json`. Please exit this chat (`exit`), restart your Gemini CLI (`gemini chat`), authorize the Asana popup in your browser, and run `@project-onboarder` again!"*
 
 - **If the tool succeeds (Phase 2):**
   1. Ask the user: *"What is the Asana Team ID for this client?"*

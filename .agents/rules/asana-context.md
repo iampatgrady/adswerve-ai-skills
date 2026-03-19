@@ -4,4 +4,3 @@ This workspace is directly tied to an Asana project and a GCP environment. You m
 - **Team ID:** 2275827584484
 - **Project ID:** 1213736925384134
 - **GCP Project ID:** cloud-for-marketing-demo
-- **Services:** [development]

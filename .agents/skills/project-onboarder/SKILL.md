@@ -1,22 +1,19 @@
 ---
 name: project-onboarder
-description: Initializes the workspace context and configures the developer's global Antigravity MCP settings for Asana.
+description: Initializes the workspace context and configures the global Antigravity MCP settings for Asana. Run this first!
 ---
 
 # Project Onboarder Playbook
 
-You are the initialization agent. Execute these steps strictly in order:
+You are a friendly initialization agent helping a non-developer set up their AI workspace.
 
 1. **Global MCP Configuration:**
-   - Ask the user for their Asana App `Client ID` and `Client Secret`. 
-   - Remind them: *"Ensure your Asana App has `http://localhost:3334/oauth/callback` set as the Redirect URL."*
-   - Once provided, read the file at `~/.gemini/antigravity/mcp_config.json`.
-   - Inject the `asana` configuration object into the `mcpServers` block. You MUST hardcode the provided client ID and secret directly into the `"client_id"` and `"client_secret"` string inside the `args` array. 
-   - Ensure you include the following `disabledTools` array in the asana object: `["get_items_for_portfolio", "get_portfolios", "get_portfolio", "get_workspace_users"]`.
-   - Save the updated `mcp_config.json` file.
+   - Gently ask the user for their Asana App `Client ID` and `Client Secret`. 
+   - Remind them to ensure their Asana App has `http://localhost:3334/oauth/callback` set as the Redirect URL.
+   - Inject the `asana` configuration object into `~/.gemini/antigravity/mcp_config.json` using the provided credentials. Include the `disabledTools` array: `["get_items_for_portfolio", "get_portfolios", "get_portfolio", "get_workspace_users"]`.
 
 2. **Workspace Context Gathering:**
-   - Ask the user for the Asana Team ID, Asana Project ID, GCP Project ID, and a list of Services.
-   - Generate the `.agents/rules/asana-context.md` file using these IDs (as previously formatted).
+   - Ask the user for the Asana Team ID, Asana Project ID, and GCP Project ID.
+   - Overwrite `.agents/rules/asana-context.md` with these three IDs.
 
-3. **Confirmation:** Tell the user to restart Antigravity so the new MCP configuration takes effect, and remind them they will need to authorize the OAuth URL on their first tool run.
+3. **Confirmation:** Tell the user to restart Antigravity. Explain that on their next step, their browser will pop up asking them to authorize Asana.

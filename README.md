@@ -1,18 +1,14 @@
-# Agentic Workspace: Adswerve Template
+# Agentic Workspace Framework
 
-Welcome! This repository is configured to be developed by AI. You don't need to know how to write code to build features here, you just need to act as the orchestrator. 
+This repository contains the AI workflows and skills required to turn any codebase into an autonomous, Asana-connected Agentic Workspace.
 
-## Phase 0: Prerequisites
-If this is your first time using this setup on your machine, please follow the instructions in [docs/setup.md](docs/setup.md).
+## How to install this into an existing repository:
+1. Open your target repository (e.g., `aeo-pulse`) in **Google Antigravity**.
+2. Open the AI Chat and paste this exact prompt:
+   > *"Download the `.agents` folder from `https://github.com/iampatgrady/asana-ai-dev` into this workspace. You can clone it to a temp directory, copy the `.agents` folder over to my root, and then delete the temp directory."*
+3. Wait for the AI to copy the files, then type: `Run @project-onboarder` to configure your Asana connection and set up the project context.
 
-## Phase 1: Initialization (Do this for every new repo)
-1. Open this folder in **Google Antigravity**.
-2. Open the Chat / Mission Control and type: `Run @project-onboarder`.
-3. The AI will help you connect your Asana app and automatically search Asana to find your Client's Team and Project IDs. 
-
-## Phase 2: Daily Workflow
-**1. Start Work**
-Type `/asana-start` in the chat. The AI will read your Asana backlog, ask you what you want to work on, create a safe workspace (a git branch), and plan the code.
-
-**2. Finish Work**
-Type `/asana-sync` in the chat. The AI will automatically save your code, push it to the cloud, create a PR link, write a status update for your Project Manager, and close the Asana ticket.
+## Daily Vibe Coder Workflow
+Once installed, use these two commands to build software:
+- `/asana-start`: The AI reads your Asana backlog, makes a branch, and plans the code.
+- `/asana-sync`: The AI saves your code, pushes it to Git, creates a PR link, updates your PM in Asana, and closes the ticket.

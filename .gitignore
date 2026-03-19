@@ -1,0 +1,34 @@
+# Mac OS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.cab
+*.ilk
+*.lib
+*.map
+*.pdb
+*.sbr
+*.obj
+*.bcd
+*.explorer
+*.tlb
+*.txf
+*.vsd
+*.vsdx
+*.wmz
+*.wvx
+*.xdf
+*.z
+desktop.ini
+
+# Agent specific
+!agent/asana.rules
+
+# Secrets
+.env

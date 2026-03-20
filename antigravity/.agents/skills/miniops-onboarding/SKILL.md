@@ -2,7 +2,7 @@
 name: miniops-onboarding
 description: Interviews the analyst to configure the MiniOps config.yaml, checks IAM permissions, and updates the active Asana task with the onboarding status.
 license: Apache-2.0
-compatibility: Requires Gemini CLI.
+compatibility: Requires Google Antigravity IDE.
 metadata:
   author: Adswerve-MLOps
   version: "1.0.0"
@@ -24,7 +24,7 @@ Use the `notify_user` tool to ask the analyst for the following core client deta
 2. **Analytics Project ID** (Where the GA4 BigQuery export lives)
 3. **GA4 Property ID** (e.g., 276598494)
 4. **GA4 Stream ID** (e.g., 2665669223)
-5. **BigQuery Dataset ID** (A unique name for the MiniOps dataset)
+5. **BigQuery Dataset ID** (A unique name for the MiniOps dataset, e.g., miniops_clientname)
 6. **Their Adswerve Email Address** (for the `deployer_email`)
 
 ## Phase 2: Configuration Injection
@@ -44,7 +44,37 @@ Use `notify_user` to ask the analyst this exact question:
 3. **STOP.**
 
 ### Path B: If the analyst answers "No" (Blocked on IT)
-1. **Generate IT Instructions:** Create `CLIENT_IT_REQUEST.md` in the root directory. Copy the exact `gcloud` commands from `IT_ACCESS_INSTRUCTIONS.md`, replacing the `<THE PROJECT ID>` and `<THE DEPLOYER EMAIL>` placeholders with the data gathered in Phase 1.
+1. **Generate IT Instructions:** Create a file named `CLIENT_IT_REQUEST.md` in the root directory and write the following text into it exactly, replacing the bracketed variables with the details gathered in Phase 1:
+
+   ```markdown
+   # Adswerve MiniOps - GCP Access Request
+   
+   Hello IT Team,
+   
+   To deploy the Adswerve predictive modeling framework, we require a custom, least-privilege IAM role to be created and assigned to our analyst.
+   
+   **Analyst Email:** [Insert Deployer Email]
+   **Target Project:** [Insert MLOps Project ID]
+   
+   Please execute the following commands in your Cloud Shell or local terminal authenticated with Google Cloud. Ensure the attached `terraform_deployer_role.yaml` file is in your working directory.
+   
+   ### Step 1: Create the Custom Role
+   \`\`\`bash
+   gcloud iam roles create terraform_miniops_deployer \
+     --project=[Insert MLOps Project ID] \
+     --file=./terraform_deployer_role.yaml
+   \`\`\`
+   
+   ### Step 2: Assign the Role to Adswerve
+   \`\`\`bash
+   gcloud projects add-iam-policy-binding [Insert MLOps Project ID] \
+     --member="user:[Insert Deployer Email]" \
+     --role="projects/[Insert MLOps Project ID]/roles/terraform_miniops_deployer"
+   \`\`\`
+   
+   If the GA4 data resides in a separate project ([Insert Analytics Project ID]), please also grant the BigQuery Data Viewer role to the analyst on that specific dataset. Let us know when this is complete!
+   ```
+
 2. **Package Artifacts:** In the terminal, run: `zip -j Adswerve_IT_Setup.zip CLIENT_IT_REQUEST.md terraform/iam/terraform_deployer_role.yaml`
 3. **PMO Sync:** Use the Asana MCP to append this status to the Active Asana Task ID:
    *"<br><br><b>Adswerve AI Update - BLOCKED:</b> The analyst does not have required GCP IAM permissions. The AI has generated `Adswerve_IT_Setup.zip` for the client's IT team. Awaiting client IT execution."*

@@ -17,12 +17,14 @@ When this skill is active, execute the following steps precisely to wire up the 
 1. Run `pipx --version` in the terminal. 
 2. If it fails, halt and instruct the user: *"You need `pipx` installed to run the Google Analytics MCP. Please install it (e.g., `brew install pipx` on Mac, or `python3 -m pip install --user pipx` on Windows/Linux) and then run `@analytics-onboarder` again."*
 
-**Step 2: Credential Scope Refresh**
-The Analytics API requires an explicit OAuth scope that standard GCP logins do not provide.
-1. Instruct the user: *"To read GA4 data, we need to refresh your local Google credentials to include Analytics read permissions."*
-2. Provide them this exact command to copy/paste and run in their terminal:
-   `gcloud auth application-default login --scopes https://www.googleapis.com/auth/analytics.readonly,https://www.googleapis.com/auth/cloud-platform`
-3. Tell them to reply "Done" once they have completed the browser authentication.
+**Step 2: Credential Scope Refresh & API Enablement**
+The Analytics API requires an explicit OAuth scope that standard GCP logins do not provide, and the project must have the API explicitly enabled. Assume `gcloud` is already installed on the user's system.
+1. Read the `config.yaml` file in the repository root to extract the target GCP Project ID (where the Asana onboarding was targeted).
+2. Instruct the user: *"I am setting your active GCP project, enabling the GA4 Data APIs, and refreshing your local Google credentials to include Analytics read permissions."*
+3. Autonomously execute this terminal command to switch projects: `gcloud config set project <EXTRACTED_PROJECT_ID>`
+4. Autonomously execute this terminal command to enable the necessary APIs: `gcloud services enable analyticsdata.googleapis.com analyticsadmin.googleapis.com --project <EXTRACTED_PROJECT_ID>`
+5. Autonomously execute this terminal command to start the login flow: `gcloud auth application-default login --scopes https://www.googleapis.com/auth/analytics.readonly,https://www.googleapis.com/auth/cloud-platform`
+6. The terminal will pause while the user completes browser authentication. Ask the user to reply "Done" once they have successfully logged in before you proceed to Step 3.
 
 **Step 3: Determine Credential Path**
 Once the user replies "Done", run a terminal command to find the exact path to their `application_default_credentials.json` file. 

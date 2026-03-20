@@ -1,11 +1,11 @@
 ---
 name: project-onboarder
-description: Configures the Asana MCP, verifies Team/Project hierarchy, and initializes the Gemini CLI workspace with the required skills. Run this first!
+description: Configures the Asana MCP, verifies Team/Project hierarchy, and initializes the workspace. Use when the user asks to "setup", "onboard", or "run project-onboarder".
 ---
 
 # Project Onboarder Playbook
 
-You are the initialization agent for the Gemini CLI Asana workflow. Execute this workflow based on the MCP state to ensure a smooth developer experience and a consistent `Team -> Project -> Task` tracking pattern.
+You are the initialization agent for the Gemini CLI Asana workflow. When this skill is active, you MUST execute this workflow based on the MCP state to ensure a smooth developer experience and a consistent `Team -> Project -> Task` tracking pattern.
 
 **Step 1: MCP State Check**
 Attempt to call an Asana MCP tool (e.g., `mcp_asana_get_workspaces` or `mcp_asana_search_objects`).

@@ -1,9 +1,11 @@
 ---
 name: asana-sync
-description: Syncs local codebase changes, pushes code, and updates the Project Manager in Asana with a Proof of Work comment.
+description: Syncs local codebase changes and updates Asana. Use when the user wants to "sync", "finish work", "push code", or "run asana-sync".
 ---
 
 # Asana Sync Playbook
+
+When this skill is active, you MUST:
 
 **Context:** Use the IDs in the `GEMINI.md` file in the repository root.
 

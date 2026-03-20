@@ -1,4 +1,4 @@
-# Agentic Workspace Framework
+# Adswerve AI Skills
 
 This repository contains the AI workflows and skills required to turn any codebase into an autonomous, Asana-connected Agentic Workspace.
 

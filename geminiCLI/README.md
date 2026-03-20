@@ -1,4 +1,4 @@
-# Agentic Workspace: Gemini CLI Edition
+# Adswerve AI Skills: Gemini CLI Edition
 
 This repository contains the AI workflows required to turn any codebase into an autonomous, Asana-connected Agentic Workspace using the **Gemini CLI**.
 

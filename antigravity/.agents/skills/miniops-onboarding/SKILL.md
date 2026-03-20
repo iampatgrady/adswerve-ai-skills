@@ -27,20 +27,24 @@ Use the `notify_user` tool to ask the analyst for the following core client deta
 4. **GA4 Stream ID** (e.g., 2665669223)
 5. **BigQuery Dataset ID** (A unique name for the MiniOps dataset, e.g., miniops_clientname)
 6. **Their Adswerve Email Address** (for the `deployer_email`)
+7. **Deployment Phase:** Ask explicitly: *"Is this configuration for an initial 'development' iteration or a final 'production' deployment? (Dev uses faster Logistic Regression, Prod uses accurate Boosted Trees)."*
 
 ## Phase 2: Configuration Injection
 1. Read the `config.yaml` file in the repository root.
 2. Update the corresponding fields with the gathered values.
 3. Update `model.display_name` to match the `bq_dataset_id`.
-4. Save the modified `config.yaml` file.
+4. Update `model.create_model_params.model_type` based on the requested Deployment Phase:
+   - For `development`, set it to `LOGISTIC_REG`.
+   - For `production`, set it to `BOOSTED_TREE_CLASSIFIER`.
+5. Save the modified `config.yaml` file.
 
 ## Phase 3: IAM Permission Check & Asana Sync (CRITICAL)
 Use `notify_user` to ask the analyst this exact question:
 > *"To deploy MiniOps, you need extensive permissions. Do you currently hold `Owner` or `Editor` roles on BOTH the MLOps project and the Analytics project, OR do you have the specific custom `terraform_miniops_deployer` permission? (Yes / No)"*
 
 ### Path A: If the analyst answers "Yes" (Ready to Deploy)
-1. Use the Asana MCP (`mcp_asana_update_task` and modify the `html_notes`) to append this status to the Active Asana Task ID: 
-   *"<br><br><b>Adswerve AI Update:</b> `config.yaml` successfully configured. The analyst verified GCP permissions and is proceeding to infrastructure deployment."*
+1. Use the Asana MCP to append this status to the Active Asana Task ID. **To avoid overwriting, you MUST first fetch the task using `mcp_asana_get_task`**, read the existing `html_notes`, append a timestamped separator (e.g., `<hr><b>Update: YYYY-MM-DD</b><br>`) along with: 
+   *"<b>Adswerve AI Update:</b> `config.yaml` successfully configured. The analyst verified GCP permissions and is proceeding to infrastructure deployment."*, and send the combined text via `mcp_asana_update_task`.
 2. Tell the analyst: *"Excellent! I've updated Asana. You are fully authorized. Please run `@miniops-deploy` when you are ready to build the infrastructure."*
 3. **STOP.**
 
@@ -77,6 +81,6 @@ Use `notify_user` to ask the analyst this exact question:
    ```
 
 2. **Package Artifacts:** In the terminal, run: `zip -j Adswerve_IT_Setup.zip CLIENT_IT_REQUEST.md terraform/iam/terraform_deployer_role.yaml`
-3. **PMO Sync:** Use the Asana MCP to append this status to the Active Asana Task ID:
-   *"<br><br><b>Adswerve AI Update - BLOCKED:</b> The analyst does not have required GCP IAM permissions. The AI has generated `Adswerve_IT_Setup.zip` for the client's IT team. Awaiting client IT execution."*
+3. **PMO Sync:** Use the Asana MCP to append this status to the Active Asana Task ID. **To avoid overwriting, you MUST first fetch the task using `mcp_asana_get_task`**, read the existing `html_notes`, append a timestamped separator (e.g., `<hr><b>Update: YYYY-MM-DD</b><br>`) along with:
+   *"<b>Adswerve AI Update - BLOCKED:</b> The analyst does not have required GCP IAM permissions. The AI has generated `Adswerve_IT_Setup.zip` for the client's IT team. Awaiting client IT execution."*, and send the combined text via `mcp_asana_update_task`.
 4. **Final Handoff:** Tell the analyst: *"I have generated `Adswerve_IT_Setup.zip` and updated Asana to reflect that we are blocked on Client IT. Please send this zip file to your client contact. Once they confirm the script was run, run `@miniops-deploy`!"*

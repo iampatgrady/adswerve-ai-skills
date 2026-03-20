@@ -28,15 +28,23 @@ Once the MCP returns the data, perform the following analysis internally:
 
 **Step 4: Present to the Analyst**
 Present the filtered top 5 events to the user in a clean Markdown table. Include the Event Name, Active Users, Event Count, and the % of Total Users.
-Ask the user: *"Based on the last 90 days of live GA4 data, these are your most prominent conversion candidates. Which of these events should we use as the predictive target for the MiniOps model?"*
+Ask the user: *"Which of these events should we use as the base predictive target for the MiniOps model?"*
 
-**Step 5: Autonomous Configuration**
-Once the user selects an event:
+**Step 5: Deep Parameter EDA**
+Once the user selects an event, do NOT immediately write to configuration. You must explore its parameters to identify potential conditional filters.
+1. Use the Analytics MCP to run a second report for the same GA4 property (last 90 days). 
+2. Add a dimension filter: `eventName` must exactly match the selected event.
+3. Request the dimension `customEvent:parameter_name` (or equivalent valid parameter dimension) to pull the most frequent custom parameters and their values for this event. 
+4. Present the top parameters and their distinct values to the user in a table.
+5. Ask the user: *"Do you want to conditionally filter this label? For example, we could only trigger the label when `[example_param] = '[example_value]'`. Reply with your desired condition, or say 'No' to use the base event."*
+
+**Step 6: Autonomous Configuration**
+Once the user decides on the condition (or opts for the base event):
 1. Read the `config.yaml` file.
-2. Locate the `label_definition:` block.
-3. Update the `name:` field under `label_definition` to exactly match the chosen event string. 
-4. Preserve all other YAML formatting. Save the file.
-5. Use the Asana MCP to append a note to the Active Asana Task (extract ID via `git branch --show-current`): *"Data Exploration Complete: Selected `[EVENT_NAME]` as the target predictive label based on 90-day GA4 volume."*
+2. Update the `name:` field under `label_definition` to exactly match the chosen event string. 
+3. If the user provided a conditional filter, uncomment and populate the `inclusion.events` block with the required `key`, `type`, `value`, and `operator` based on their request.
+4. Save the file.
+5. Use the Asana MCP to append a note to the Active Asana Task (extract ID via `git branch --show-current`). **To avoid overwriting**, first fetch the task using `mcp_asana_get_task`, read the existing `html_notes`, append a timestamped separator along with: *"Data Exploration Complete: Selected `[EVENT_NAME]` as the target predictive label (Filters: `[ANY_FILTERS]`), based on 90-day GA4 volume."*, and send the combined text via `mcp_asana_update_task`.
 6. Tell the user: *"Configuration updated! You are now ready to run `@miniops-onboarding`."*
 
 ## Error Handling

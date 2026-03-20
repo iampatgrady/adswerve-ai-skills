@@ -15,12 +15,12 @@ When this skill is active, you MUST:
 
 **Context:** Use the IDs provided in the `GEMINI.md` file in the repository root.
 
-**Step 1: Fetching the Backlog**
-- Use `mcp_asana_get_tasks` (or `mcp_asana_search_objects`) to fetch `incomplete` tasks for our Project ID.
-- Present a numbered list of open tasks to the user and ask: *"Which task would you like to build?"*
+**Step 1: Fetching the Context & Backlog**
+- **Direct URL Input:** If the user provides an Asana Task URL (e.g., `https://app.asana.com/0/<workspace_id>/<project_id>/<task_id>`), parse it immediately to extract the Workspace, Project, and Task IDs. Skip to Step 2.
+- **Backlog Query:** Otherwise, use `mcp_asana_get_tasks` (or `mcp_asana_search_objects`) to fetch `incomplete` tasks for our Project ID. Present a numbered list to the user and ask: *"Which task would you like to build?"*
 
 **Step 2: Autonomous Branching and Context Compression**
-- Once the user selects a task, fetch the task's full description using `mcp_asana_get_task`.
+- Fetch the chosen task's full description using `mcp_asana_get_task`.
 - Autonomously run `git checkout main`, `git pull`, and `git checkout -b feature/asana-task-<ID>`.
 - **CRITICAL - AST Analysis:** Do not blindly `grep` or read files one by one. Use the Repomix MCP server to generate a compressed Abstract Syntax Tree (AST) XML representation of the repository. Read this compressed context to understand the current architecture and how it relates to the task.
 - **Plan Mode:** Ensure you are operating in a read-only/planning state. Generate an `implementation_plan.md` artifact detailing exactly what code you will write and what files you will modify. Do not write any application code yet.

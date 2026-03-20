@@ -19,3 +19,5 @@ To get started, please navigate to the active setup guide corresponding to your 
 These specialized skills automate infrastructure deployments and IT handoffs specifically for Data Analysts working on GCP:
 - **`@miniops-onboarding`**: Guides the analyst through configuration, verifies GCP IAM permissions, autonomously generates IT access requests if needed, and updates the active Asana task with blocked/ready statuses.
 - **`@miniops-deploy`**: Remotely executes Terraform infrastructure buildouts and pipes the terminal status stream back to the Project Manager inside Asana.
+- **`@analytics-onboarder`**: Automatically installs the official Google Analytics MCP server and configures your local GCP credentials for secure read-only API access.
+- **`@miniops-label-explorer`**: Queries your live GA4 data via the MCP to analyze event distributions, filtering out noise and autonomously configuring the optimal predictive label in your `config.yaml`.

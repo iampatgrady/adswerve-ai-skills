@@ -22,9 +22,9 @@ When this skill is active, you MUST:
 
 **Step 2: PM Handoff & Proof of Work via Asana MCP**
 - Ask the user: *"Which Asana Task ID did you just complete?"*
-- **CRITICAL ASANA LIMITATIONS:** The MCP cannot update tags. You MUST use `mcp_asana_update_task` and pass `completed: true`. 
-- **Proof of Work:** Use `html_notes` (formatted with basic HTML) to append a "Proof of Work" update to the task description.
-  The Proof of Work comment MUST be written for a non-technical Project Manager. It must clearly include:
+- **CRITICAL ASANA LIMITATIONS:** The MCP cannot currently update tags or create Task Comments (Stories). You MUST use `mcp_asana_update_task` and pass `completed: true`. 
+- **Proof of Work Logging:** Because we cannot create comments natively yet, you must append your "Proof of Work" update to the bottom of the existing `html_notes` (description). Add a clear `<hr>` and timestamp (e.g. `<b>Update: YYYY-MM-DD</b><br>`) to emulate a comment thread without destroying the original description context.
+  The Proof of Work log entry MUST be written for a non-technical Project Manager. It must clearly include:
   1. The business value achieved.
   2. Any GCP infrastructure changes.
   3. The Pull Request URL.

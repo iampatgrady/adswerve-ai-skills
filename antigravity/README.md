@@ -5,7 +5,7 @@ This repository contains the AI workflows required to turn any codebase into an 
 ## Bootstrapping a New Repository
 1. Clone your target repository and open your terminal.
 2. Type `gemini chat` to start your AI session.
-3. Paste: *"Download the `.agents` folder and `GEMINI.template.md` from the `cli-version` branch of `https://github.com/iampatgrady/asana-ai-dev` into this workspace."*
+3. Paste: *"Download the contents of the `antigravity` folder from `https://github.com/iampatgrady/adswerve-ai-skills` into this workspace."*
 4. Run `@project-onboarder` to configure your Asana connection and set up the project context.
 
 ## Daily Workflow

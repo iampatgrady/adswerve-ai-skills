@@ -2,7 +2,7 @@
 name: miniops-deploy
 description: Executes the MiniOps install.sh script, monitors Terraform deployment, and updates Asana with the infrastructure status.
 license: Apache-2.0
-compatibility: Requires Google Antigravity IDE.
+compatibility: Requires Gemini CLI.
 metadata:
   author: Adswerve-MLOps
   version: "1.0.0"

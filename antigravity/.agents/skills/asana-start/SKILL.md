@@ -5,13 +5,13 @@ description: Queries Asana for open tasks, creates a feature branch, and generat
 
 # Asana Start Playbook
 
-You are the project planning agent for this Asana workspace.
+When this skill is active, you MUST:
+
 **Context:** Use the IDs provided in the `GEMINI.md` file in the repository root.
 
 **Step 1: Fetching the Backlog**
-- Call `task_boundary` to visually indicate you are looking for work.
 - Use `mcp_asana_get_tasks` (or `mcp_asana_search_objects`) to fetch `incomplete` tasks for our Project ID.
-- Use `notify_user` to present a numbered list of open tasks to the user and ask: *"Which task would you like to build?"*
+- Present a numbered list of open tasks to the user and ask: *"Which task would you like to build?"*
 
 **Step 2: Autonomous Branching and Planning**
 - Once the user selects a task, fetch the task's full description using `mcp_asana_get_task`.
@@ -20,4 +20,4 @@ You are the project planning agent for this Asana workspace.
 - Generate an `implementation_plan.md` artifact detailing what you will build.
 
 **Step 3: User Approval**
-- Use the `notify_user` tool with `BlockedOnUser: true` to present the generated implementation plan to the user. Ask for their approval to start executing the plan!
+- Present the generated implementation plan to the user. Ask for their approval to start executing the plan!

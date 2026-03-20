@@ -10,7 +10,6 @@ This repository follows the strict `Team -> Project -> Task` pattern for Project
 1. Run `@asana-start` to pick a task from the project backlog.
 2. Complete the work locally.
 3. Run `@asana-sync` to push code and provide a Proof of Work comment on the Asana task.
-
 ## Data Science Workflow (MiniOps)
 If this repository contains the MiniOps framework, analysts will use a specialized skill suite. These skills automatically update Asana tasks based on the current Git branch.
 1. Run `@asana-start` to pick a task and create a branch.

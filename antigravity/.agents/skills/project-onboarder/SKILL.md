@@ -1,6 +1,12 @@
 ---
 name: project-onboarder
-description: Configures the Asana MCP, verifies Team/Project hierarchy, and initializes the workspace. Use when the user asks to "setup", "onboard", or "run project-onboarder".
+description: Configures the Asana and Repomix MCPs, verifies Team/Project hierarchy, and initializes the workspace context. Use when the user asks to "setup", "onboard", or "run project-onboarder".
+license: Apache-2.0
+compatibility: Requires Google Antigravity IDE.
+metadata:
+  author: Adswerve-MLOps
+  version: "1.1.0"
+  tags: [asana, mcp, setup, context, repomix]
 ---
 
 # Project Onboarder Playbook
@@ -13,7 +19,9 @@ Attempt to call an Asana MCP tool (e.g., `mcp_asana_get_workspaces` or `mcp_asan
   1. Explain the onboarding process: *"Welcome to the Adswerve Asana workflow! First, we need to connect to the Asana MCP to sync tasks and proof-of-work comments."*
   2. Ask the user for their Asana App `Client ID` and `Client Secret`.
   3. Read `~/.gemini/settings.json` (create it with an empty `{"mcpServers": {}}` object if it doesn't exist).
-  4. Inject the `asana` object into `mcpServers`. Use `npx` with args `["-y", "mcp-remote@latest", "https://mcp.asana.com/v2/mcp", "3334", "--static-oauth-client-info", "{\"client_id\": \"[PROVIDED_ID]\", \"client_secret\": \"[PROVIDED_SECRET]\"}"]`. Include the `disabledTools` array: `["get_items_for_portfolio", "get_portfolios", "get_portfolio", "get_workspace_users"]`.
+  4. Inject TWO objects into the `mcpServers` configuration:
+     - First, inject the `asana` object. Use command `npx` with args `["-y", "mcp-remote@latest", "https://mcp.asana.com/v2/mcp", "3334", "--static-oauth-client-info", "{\"client_id\": \"[PROVIDED_ID]\", \"client_secret\": \"[PROVIDED_SECRET]\"}"]`. Include the `disabledTools` array: `["get_items_for_portfolio", "get_portfolios", "get_portfolio", "get_workspace_users"]`.
+     - Second, inject a `repomix` object to provide codebase compression. Use command `npx` with args `["-y", "repomix", "--mcp"]`.
   5. Save the file.
   6. **STOP.** Tell the user: *"I have configured your MCP plumbing in `~/.gemini/settings.json`. Please exit this chat (`exit`), restart your Gemini CLI (`gemini chat`), authorize the Asana popup in your browser, and run `@project-onboarder` again to finish setup!"*
 

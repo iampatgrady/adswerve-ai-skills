@@ -1,6 +1,12 @@
 ---
 name: asana-sync
 description: Syncs local codebase changes, pushes code, and updates the Project Manager in Asana with a Proof of Work comment.
+license: Apache-2.0
+compatibility: Requires Gemini CLI.
+metadata:
+  author: Adswerve-MLOps
+  version: "1.1.0"
+  tags: [asana, git, sync, proof-of-work]
 ---
 
 # Asana Sync Playbook
@@ -26,3 +32,7 @@ When this skill is active, you MUST:
 **Step 3: Walkthrough generation**
 - Create a `walkthrough.md` artifact that documents what was accomplished locally.
 - Present the PR link and the Walkthrough to the user, confirming the task is complete.
+
+## Error Handling & Safety Rules
+- **Rate Limits (429):** If an Asana or GCP API call fails with a 429 error, wait 10 seconds and retry automatically. Do not bother the user.
+- **MCP Disconnection:** If the Asana or Repomix MCP tool calls fail entirely, immediately halt execution. Instruct the user: *"My MCP servers appear to be disconnected. Please verify your `~/.gemini/settings.json` file is properly configured and restart your IDE/CLI."*

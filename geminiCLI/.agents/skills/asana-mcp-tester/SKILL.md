@@ -1,6 +1,12 @@
 ---
 name: asana-mcp-tester
 description: A diagnostic skill that verifies the developer's local environment variables and tests the Asana MCP connection.
+license: Apache-2.0
+compatibility: Requires Gemini CLI.
+metadata:
+  author: Adswerve-MLOps
+  version: "1.1.0"
+  tags: [asana, mcp, diagnostics, pre-flight]
 ---
 
 # Asana MCP Pre-Flight Checker

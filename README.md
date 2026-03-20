@@ -12,3 +12,8 @@ This repository contains the AI workflows and skills required to turn any codeba
 Once installed, use these two skills to build software:
 - `@asana-start`: The AI reads your Asana backlog, makes a branch, and plans the code in a task boundary.
 - `@asana-sync`: The AI saves your code, pushes it to Git, creates a PR link, updates your PM in Asana, and closes the ticket.
+
+### Data Science / MiniOps Suite
+For MLOps analysts deploying the MiniOps framework, use these skills to automate configuration and IT handoffs:
+- `@miniops-onboarding`: Configures `config.yaml`, checks GCP IAM, generates an IT access request ZIP, and updates Asana.
+- `@miniops-deploy`: Runs the `./install.sh` Terraform deployment and logs the infrastructure status to Asana.

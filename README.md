@@ -7,12 +7,17 @@ To get started, please navigate to the active setup guide corresponding to your 
 - [**Google Antigravity IDE**](./antigravity): The native skills and commands optimized for the Google Antigravity Editor environment.
 - [**Gemini CLI**](./geminiCLI): The native skills and commands optimized for the Gemini CLI terminal workflow.
 
-## Included Core Skills
+## Workspace Structure (V2)
+- **`.agents/rules/`**: Static context and configuration files (e.g., `asana-context.md`, `active-task.md`).
+- **`.agents/skills/`**: Specialized agent capabilities and initialization tools (e.g., `@project-onboarder`, `@miniops-deploy`).
+- **`.agents/workflows/`**: Daily developer actions triggered via slash commands (e.g., `/asana-start`, `/asana-sync`).
 
-- **`@project-onboarder`**: Interactively connects your local developer workspace to the active Asana project.
-- **`@asana-mcp-tester`**: Diagnostic script to securely verify the connection to the Asana MCP server.
-- **`@asana-start`**: Automatically selects tasks from the project backlog, creates a new Git feature branch, and outlines an implementation strategy.
-- **`@asana-sync`**: Commits and pushes your code to Git, appends a Proof of Work summary on the Asana task, and handles ticket closure.
+## Included Core Workflows & Skills
+
+- **`@project-onboarder`** (Skill): Interactively connects your local developer workspace to the active Asana project.
+- **`@asana-mcp-tester`** (Skill): Diagnostic script to securely verify the connection to the Asana MCP server.
+- **`/asana-start`** (Workflow): Automatically selects tasks from the project backlog, creates a semantic Git feature branch, and outlines an implementation strategy.
+- **`/asana-sync`** (Workflow): Commits and pushes your code to Git, appends a native Proof of Work comment on the Asana Epic/Subtask, and handles ticket closure.
 
 ## Data Science "MiniOps" Suite
 

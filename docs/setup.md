@@ -3,8 +3,8 @@
 Before using this Agentic Workspace, you must configure your local machine. You only need to do this once per computer. 
 
 ### 1. Install Core CLI Tools
-- **Google Antigravity IDE:** Download and install the latest version (if using IDE).
-- **Gemini CLI:** Install via your terminal package manager (e.g., `npm install -g @google/gemini-cli`) (if using CLI).
+- **Google Antigravity IDE:** Download and install the latest version (if using IDE). MCP config lives in `~/.gemini/antigravity/mcp_config.json`.
+- **Gemini CLI:** Install via your terminal package manager (e.g., `npm install -g @google/gemini-cli`) (if using CLI). MCP config lives in `~/.gemini/settings.json`.
 - **Google Cloud CLI (gcloud):** Install and run `gcloud auth application-default login` to grant local agents access to GCP.
 
 ### 2. Git & SSH Authentication
@@ -20,4 +20,5 @@ Ensure you have an SSH key generated and added to your Bitbucket/GitHub account 
 1. Go to Asana Developer Console > Create New App.
 2. Name it "Agentic Workspace Local MCP".
 3. **CRITICAL:** Add `http://localhost:3334/oauth/callback` as a Redirect URL.
-4. Note your `Client ID` and `Client Secret`. You will give these to the AI during Phase 1 onboarding.
+4. Note your `Client ID` and `Client Secret`. You will give these to the AI during Phase 1 onboarding (via `@project-onboarder`).
+5. Note the full URL of your Asana Project (e.g., `https://app.asana.com/0/<WORKSPACE_ID>/<PROJECT_ID>`). You will provide this URL during onboarding.
